@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uzduotis</title>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ task.name }}</h1>
+  <p>{{ task.description }}</p>
+{% endblock %}
+
+</body>
+</html>
