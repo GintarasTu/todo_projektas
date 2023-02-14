@@ -15,15 +15,16 @@ class TaskListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Task.objects.filter(due_date__lte=timezone.now()).order_by('due_date')
+        return Task.objects.filter(user=self.request.user)
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
-    template_name = 'tasks/task_detail.html'
+    template_name = 'task_detail.html'
+    context_object_name = 'task'
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
-    template_name = 'tasks/task_form.html'
+    template_name = 'task_form.html'
     fields = ['title', 'description', 'due_date']
 
     def form_valid(self, form):
@@ -32,12 +33,12 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
-    template_name = 'tasks/task_form.html'
+    template_name = 'task_form.html'
     fields = ['title', 'description', 'due_date']
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    template_name = 'tasks/task_confirm_delete.html'
+    template_name = 'task_confirm_delete.html'
     success_url = reverse_lazy('tasks')
 
 class SignUpView(CreateView):
