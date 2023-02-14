@@ -1,0 +1,6 @@
+<h1>Edit Task</h1>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="task" value="{{ task }}">
+  <input type="submit" value="Save">
+</form>

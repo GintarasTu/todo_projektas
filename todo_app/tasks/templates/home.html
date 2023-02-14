@@ -1,0 +1,12 @@
+<h1>Mano užduočių sąrašas</h1>
+<ul>
+  {% for task in tasks %}
+    <li>
+      {{ task.task }}
+      <a href="{% url 'edit_task' task.id %}">edit</a>
+      <a href="{% url 'delete_task' task.id %}">delete</a>
+    </li>
+  {
+   {% endfor %}
+</ul>
+<a href="{% url 'add_task' %}">Add Task</a>

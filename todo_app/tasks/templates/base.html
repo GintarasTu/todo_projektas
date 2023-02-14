@@ -17,6 +17,7 @@
         <ul class="sidebar-nav">
           {% if user.is_authenticated %}
           <li><a href="{% url 'task_list' %}">Užduotys</a></li>
+          <li><a href="{% url 'add_task' %}">Nauja užduotis</a></li>
           <li><a href="{% url 'logout' %}">Atsijungti</a></li>
           {% else %}
           <li><a href="{% url 'login' %}">Prisijungti</a></li>

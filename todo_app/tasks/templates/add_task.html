@@ -1,0 +1,8 @@
+<h1>Add Task</h1>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="Task">
+  <input type="text" name="description" placeholder="Task">
+
+  <input type="submit" value="Add">
+</form>

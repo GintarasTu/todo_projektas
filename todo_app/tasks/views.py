@@ -47,3 +47,36 @@ class SignUpView(CreateView):
     template_name = 'signup.html'
 
 
+@login_required
+def home(request):
+    tasks = Task.objects.filter(user=request.user)
+    return render(request, 'home.html', {'tasks': tasks})
+
+@login_required
+def add_task(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        description = request.POST['description']
+        task_obj = Task(name=name, description=description, user=request.user)
+        task_obj.save()
+        return redirect('home')
+    return render(request, 'add_task.html')
+
+@login_required
+def edit_task(request, task_id):
+    task_obj = Task.objects.get(id=task_id)
+    if task_obj.user != request.user:
+        return redirect('home')
+    if request.method == 'POST':
+        task_obj.task = request.POST['task']
+        task_obj.save()
+        return redirect('home')
+    return render(request, 'edit_task.html', {'task': task_obj.task})
+
+@login_required
+def delete_task(request, task_id):
+    task_obj = Task.objects.get(id=task_id)
+    if task_obj.user != request.user:
+        return redirect('home')
+    task_obj.delete()
+    return redirect('home')
