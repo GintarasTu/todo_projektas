@@ -15,9 +15,12 @@
       <div class="col-sm-2">
       {% block sidebar %}
         <ul class="sidebar-nav">
-          <li><a href="">Pradžia</a></li>
-          <li><a href="">Visos knygos</a></li>
-          <li><a href="">Visi autoriai</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'task_list' %}">Užduotys</a></li>
+          <li><a href="{% url 'logout' %}">Atsijungti</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}">Prisijungti</a></li>
+        {% endif %}
         </ul>
      {% endblock %}
       </div>
